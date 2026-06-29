@@ -1,19 +1,19 @@
-# File: /root/imagitech-install/03-deploy-sidecars.sh
+# File: /root/virtarixtech-install/03-deploy-sidecars.sh
 # Purpose: Idempotent deployment of Dante, UDP Custom, and DNSTT.
 
 #!/bin/bash
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/installer_utils.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/installer_utils.sh
 
 log_event "INFO" "Deploying Phase 3: Sidecar Protocols"
 
 # Define your raw binary hosting URL
-BINARY_URL="https://raw.githubusercontent.com/imagi-tech/autoscriptssh/main/binaries"
+BINARY_URL="https://raw.githubusercontent.com/virtarix-tech/autoscriptssh/main/binaries"
 IFACE=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)
 
 safe_download_binary() {
     local bin_name="$1"
-    local dest_path="/opt/imagitech/bin/$bin_name"
+    local dest_path="/opt/virtarixtech/bin/$bin_name"
     
     if [ ! -x "$dest_path" ]; then
         run_with_spinner "Downloading pre-compiled binary ($bin_name)..." wget -qO "$dest_path" "${BINARY_URL}/${bin_name}"
@@ -52,7 +52,7 @@ log_event "INFO" "Deploying UDP Custom..."
 safe_download_binary "udp-custom"
 
 # Ensure udp-custom has net_admin capabilities to bind to all ports if needed
-setcap cap_net_bind_service=+ep /opt/imagitech/bin/udp-custom 2>/dev/null || true
+setcap cap_net_bind_service=+ep /opt/virtarixtech/bin/udp-custom 2>/dev/null || true
 
 mkdir -p /etc/udp-custom
 cat <<EOF > /etc/udp-custom/config.json
@@ -66,7 +66,7 @@ cat <<EOF > /etc/udp-custom/config.json
 }
 EOF
 
-cat <<EOF > /tmp/imagitech-udp-custom.service.tmp
+cat <<EOF > /tmp/virtarixtech-udp-custom.service.tmp
 [Unit]
 Description=UDP Custom Proxy Server
 After=network.target
@@ -75,7 +75,7 @@ After=network.target
 User=root
 Type=simple
 WorkingDirectory=/etc/udp-custom
-ExecStart=/opt/imagitech/bin/udp-custom server -exclude 53,5300
+ExecStart=/opt/virtarixtech/bin/udp-custom server -exclude 53,5300
 Restart=always
 RestartSec=3
 
@@ -83,7 +83,7 @@ RestartSec=3
 WantedBy=multi-user.target
 EOF
 
-safe_deploy_systemd "imagitech-udp-custom"
+safe_deploy_systemd "virtarixtech-udp-custom"
 
 # --- 3. DNSTT / SlowDNS (Pre-compiled) ---
 log_event "INFO" "Deploying DNSTT SlowDNS Server..."
@@ -103,10 +103,10 @@ if systemctl is-active --quiet systemd-resolved; then
 fi
 
 # Idempotent DNSTT Key Generation
-if [ ! -f "/opt/imagitech/core/keys/dnstt.pub" ]; then
+if [ ! -f "/opt/virtarixtech/core/keys/dnstt.pub" ]; then
     log_event "INFO" "Generating new DNSTT keys..."
-    cd /opt/imagitech/core/keys
-    /opt/imagitech/bin/dnstt-server -gen-key -privkey-file dnstt.key -pubkey-file dnstt.pub
+    cd /opt/virtarixtech/core/keys
+    /opt/virtarixtech/bin/dnstt-server -gen-key -privkey-file dnstt.key -pubkey-file dnstt.pub
 else
     log_event "INFO" "DNSTT keys already exist. Skipping generation."
 fi
@@ -126,22 +126,22 @@ fi
 ensure_package "iptables-persistent"
 netfilter-persistent save >/dev/null 2>&1
 
-cat <<EOF > /tmp/imagitech-dnstt.service.tmp
+cat <<EOF > /tmp/virtarixtech-dnstt.service.tmp
 [Unit]
-Description=Imagitech DNSTT Server
+Description=Virtarixtech DNSTT Server
 After=network.target
 
 [Service]
 Type=simple
 User=root
-ExecStart=/opt/imagitech/bin/dnstt-server -udp :5300 -privkey-file /opt/imagitech/core/keys/dnstt.key ${NS_DOMAIN} 127.0.0.1:${PORT_SSH}
+ExecStart=/opt/virtarixtech/bin/dnstt-server -udp :5300 -privkey-file /opt/virtarixtech/core/keys/dnstt.key ${NS_DOMAIN} 127.0.0.1:${PORT_SSH}
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-safe_deploy_systemd "imagitech-dnstt"
+safe_deploy_systemd "virtarixtech-dnstt"
 
 log_event "INFO" "Sidecar Protocols Deployed Successfully."
 
