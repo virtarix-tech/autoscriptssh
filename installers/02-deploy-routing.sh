@@ -1,30 +1,22 @@
 #!/bin/bash
-# File: /opt/imagitech/installers/02-deploy-routing.sh
+# File: /opt/virtarixtech/installers/02-deploy-routing.sh
 # Purpose: Idempotent deployment of Dropbear, Stunnel, and the Async Proxy.
 
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/installer_utils.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/installer_utils.sh
 
 log_event "INFO" "Deploying Phase 2: Data Plane & Routing Engine"
 
-safe_create_dir "/opt/imagitech/services/routing"
+safe_create_dir "/opt/virtarixtech/services/routing"
 
 # --- 1. Configure Dropbear & OpenSSH ---
 log_event "INFO" "Configuring Dropbear and OpenSSH..."
 
 # Write the Premium Default Banner
 cat <<'EOF' > /etc/issue.net
-<b><font color="#00aaaa">PREMIUM SERVER • POWERED BY †hε drεαmεr</font></b><br>
-<font color="#00aaaa">━━━━━━━━━━━━━━━━━━━━━</font><br><br>
-<b><font color="#ff00ff">JOIN TELEGRAM 👇 IMAGI TECH</font></b><br>
-<font color="#ff00ff">t.me/imagitech001</font><br><br>
-<font color="#00aaaa">━━━━━━━━━━━━━━━━━━━━━</font><br><br>
-<b><font color="#ff0000">TERMS OF SERVICE</font></b><br><br>
-<font color="#ff8800">• NO ABUSE / NO SPAM / NO ILLEGAL USE</font><br>
-<font color="#ff8800">• DO NOT SHARE CONFIGS PUBLICLY</font><br>
-<font color="#ff8800">• VIOLATION = ACCESS TERMINATED</font><br><br>
-<font color="#00aaaa">━━━━━━━━━━━━━━━━━━━━━</font><br><br>
-<b><font color="#ff00ff">USE RESPONSIBLY • ENJOY FAST & SECURE ACCESS</font></b>
+</strong> <p style="text-align:center"><b> <br><font color="#00eaff""<br>┏━━━━━━━━━━━━━━━┓<br>💎𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝚂𝙴𝚁𝚅𝙴𝚁💎<br>┗━━━━━━━━━━━━━━━┛<br></font><br><font color="#00FF00"></strong> <p style="text-align:center"><b> <br><font color="#ff9ae"">क═══════क⊹⊱✫⊰⊹क═══════क</font><br><font color='#FFFF32'><b> ༆𝚆𝙴𝙻𝙲𝙾𝙼𝙴 𝚃𝙾 𝙼𝚈 𝚂𝙴𝚁𝚅𝙴𝚁༆
+</b></font><br><font color="#FF2121">𝗦𝗘𝗥𝗩𝗘𝗥 𝗥𝗨𝗟𝗘𝗦</font><br> <font color="#00eaff">❖𝖭𝖮 𝖣𝖣𝖮𝖲 </font><br><font color="#FF000">❖𝖭𝖮 𝖬𝖨𝖭𝖨𝖭𝖦</font><br><font color="#79ff">❖𝖭𝖮 𝖳𝖮𝖱𝖱𝖤𝖭𝖳</font><br><font color="#ae44FF">❖𝖭𝖮 𝖧𝖠𝖢𝖪𝖨𝖭𝖦</font><br><font color="#ffff32">❖𝖭𝖮 𝖲𝖯𝖠𝖬𝖬𝖨𝖭𝖦 </font><br><font color="#ff2799">❖𝖭𝖮 𝖬𝖴𝖫𝖳𝖨𝖯𝖫𝖤 𝖫𝖮𝖦𝖨𝖭𝖲 </font><br> <font color="#ff9ae"">क═══════क⊹⊱✫⊰⊹क═══════क 
+</font><br><font color="#89ff">𝖢𝗋𝖾𝖺𝗍𝖾𝖽 𝖡𝗒 ✦𝚒𝙽𝙴𝚃 𝚃𝙴𝙲𝙷𝚈 𝚃𝙴𝙰𝙼✦
 EOF
 
 # Enforce banner globally (Ubuntu 20/22/24 & Debian 11/12 fix)
@@ -48,10 +40,10 @@ fi
 
 # 2. Priority Drop-in for Modern OS (Ubuntu 24.04+)
 mkdir -p /etc/ssh/sshd_config.d
-echo "Banner /etc/issue.net" > /etc/ssh/sshd_config.d/99-imagitech-banner.conf
-echo "MaxStartups 1000:30:2000" >> /etc/ssh/sshd_config.d/99-imagitech-banner.conf
-echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config.d/99-imagitech-banner.conf
-echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config.d/99-imagitech-banner.conf
+echo "Banner /etc/issue.net" > /etc/ssh/sshd_config.d/99-virtarixtech-banner.conf
+echo "MaxStartups 1000:30:2000" >> /etc/ssh/sshd_config.d/99-virtarixtech-banner.conf
+echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config.d/99-virtarixtech-banner.conf
+echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config.d/99-virtarixtech-banner.conf
 
 # 3. Reload Daemons (Including Ubuntu 24 Socket Activation)
 systemctl daemon-reload
@@ -74,18 +66,18 @@ systemctl restart dropbear
 log_event "INFO" "Deploying Async WebSocket Multiplexer..."
 
 # The master installer already placed the file here, just ensure it's executable
-chmod +x /opt/imagitech/services/routing/ws-proxy.py
+chmod +x /opt/virtarixtech/services/routing/ws-proxy.py
 
-cat <<EOF > /tmp/imagitech-ws.service.tmp
+cat <<EOF > /tmp/virtarixtech-ws.service.tmp
 [Unit]
-Description=Imagitech Async WS Multiplexer
+Description=Virtarixtech Async WS Multiplexer
 After=network.target dropbear.service
 
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/opt/imagitech/services/routing
-ExecStart=/usr/bin/python3 /opt/imagitech/services/routing/ws-proxy.py
+WorkingDirectory=/opt/virtarixtech/services/routing
+ExecStart=/usr/bin/python3 /opt/virtarixtech/services/routing/ws-proxy.py
 Restart=always
 RestartSec=3
 LimitNOFILE=1048576
@@ -94,7 +86,7 @@ LimitNOFILE=1048576
 WantedBy=multi-user.target
 EOF
 
-safe_deploy_systemd "imagitech-ws"
+safe_deploy_systemd "virtarixtech-ws"
 
 # --- 3. Stunnel (SSL Termination) ---
 log_event "INFO" "Configuring Stunnel4 TLS Bridging..."
@@ -104,7 +96,7 @@ ensure_tls_cert "$PRIMARY_DOMAIN"
 
 cat <<EOF > /etc/stunnel/stunnel.conf
 pid = /var/run/stunnel.pid
-cert = /opt/imagitech/core/keys/stunnel.pem
+cert = /opt/virtarixtech/core/keys/stunnel.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = a:SO_KEEPALIVE=1
