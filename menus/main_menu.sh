@@ -1,10 +1,10 @@
 #!/bin/bash
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/system.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/system.sh
 
 # --- Root Enforcement ---
 if [ "${EUID}" -ne 0 ]; then
-    echo -e "\033[0;31m[FATAL] You must be root to access the Imagitech Dashboard.\033[0m"
+    echo -e "\033[0;31m[FATAL] You must be root to access the Virtarixtech Dashboard.\033[0m"
     echo -e "\033[0;33mType this command to become root: sudo su -\033[0m"
     exit 1
 fi
@@ -25,7 +25,7 @@ draw_line() { echo -e "${CYAN}━━━━━━━━━━━━━━━━�
 
 # --- Live Data Harvesters ---
 fetch_server_geo() {
-    local geo_file="/opt/imagitech/core/server_geo.env"
+    local geo_file="/opt/virtarixtech/core/server_geo.env"
     
     # Only fetch the data if the cache file doesn't exist yet
     if [ ! -f "$geo_file" ]; then
@@ -58,7 +58,7 @@ get_system_stats() {
     
     # New Static Geo Stats
     fetch_server_geo
-    source /opt/imagitech/core/server_geo.env 2>/dev/null
+    source /opt/virtarixtech/core/server_geo.env 2>/dev/null
     
     # Server Bandwidth Stats
     BW_TODAY="0.00 MB"
@@ -152,7 +152,7 @@ execute_add_user() {
         read -p "Bandwidth Limit in GB (0 = Unlimited) [Default: 0]: " BW_LIMIT
         BW_LIMIT=${BW_LIMIT:-0}
 
-        /opt/imagitech/bin/imagitech user add "$USERNAME" "$PASSWORD" "$DAYS" "$MAX_LOGINS" "$BW_LIMIT" > /dev/null 2>&1
+        /opt/virtarixtech/bin/virtarixtech user add "$USERNAME" "$PASSWORD" "$DAYS" "$MAX_LOGINS" "$BW_LIMIT" > /dev/null 2>&1
         API_STATUS=$?
         
         if [ $API_STATUS -eq 2 ]; then
@@ -187,7 +187,7 @@ execute_trial_user() {
     read -p "Bandwidth Limit in GB (0 = Unlimited) [Default: 0]: " BW_LIMIT
     BW_LIMIT=${BW_LIMIT:-0}
 
-    /opt/imagitech/bin/imagitech user trial "$USERNAME" "$PASSWORD" "$HOURS" "$MAX_LOGINS" "$BW_LIMIT" > /dev/null 2>&1
+    /opt/virtarixtech/bin/virtarixtech user trial "$USERNAME" "$PASSWORD" "$HOURS" "$MAX_LOGINS" "$BW_LIMIT" > /dev/null 2>&1
     print_user_receipt "$USERNAME" "$PASSWORD" "$HOURS" "hours" "$MAX_LOGINS" "$BW_LIMIT"
 }
 
@@ -210,7 +210,7 @@ execute_renew_user() {
     fi
 
     # Call the API silently
-    /opt/imagitech/bin/imagitech user renew "$FINAL_USERNAME" "$MOD_DAYS" > /dev/null 2>&1
+    /opt/virtarixtech/bin/virtarixtech user renew "$FINAL_USERNAME" "$MOD_DAYS" > /dev/null 2>&1
     
     # Fetch the newly updated expiry from the database
     local NEW_EXPIRY=$(sqlite3 "$DB_PATH" "SELECT expiry_date FROM users WHERE username='$FINAL_USERNAME';" 2>/dev/null)
@@ -284,7 +284,7 @@ execute_del_user() {
 
     echo -e "\n${ORANGE}[*] Deleting ${#TO_DELETE[@]} account(s)...${NC}"
     for target in "${TO_DELETE[@]}"; do
-        /opt/imagitech/bin/imagitech user del "$target" > /dev/null 2>&1
+        /opt/virtarixtech/bin/virtarixtech user del "$target" > /dev/null 2>&1
         echo -e "  - Deleted: ${RED}${target}${NC}"
     done
     pause
@@ -319,7 +319,7 @@ execute_online_users() {
     printf "${BOLD}%-20s | %-15s${NC}\n" "USERNAME" "ACTIVE DEVICES"
     draw_line
     
-    local raw_data=$(/opt/imagitech/bin/imagitech sys online)
+    local raw_data=$(/opt/virtarixtech/bin/virtarixtech sys online)
     
     if [[ "$raw_data" == *"No active"* ]] || [[ "$raw_data" == *"starting"* ]]; then
         echo -e "${ORANGE}$raw_data${NC}"
@@ -350,13 +350,13 @@ execute_user_details() {
     
     # Fetch dynamic server data
     local IP_ADDR=$(curl -sS ipv4.icanhazip.com)
-    local PUB_KEY=$(cat /opt/imagitech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
+    local PUB_KEY=$(cat /opt/virtarixtech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
 
     local MAX_LOGINS=$(sqlite3 "$DB_PATH" "SELECT max_logins FROM users WHERE username='$FINAL_USERNAME';" 2>/dev/null || echo "2")
     local LOGIN_DISP="$MAX_LOGINS"
     if [ "$MAX_LOGINS" -eq 0 ]; then LOGIN_DISP="Unlimited"; fi
 
-    source /opt/imagitech/core/server_geo.env 2>/dev/null
+    source /opt/virtarixtech/core/server_geo.env 2>/dev/null
     local COUNTRY="${SERVER_COUNTRY:-Unknown}"
     local ISP="${SERVER_ISP:-Unknown}"
 
@@ -457,9 +457,9 @@ print_user_receipt() {
     local BW_LIMIT="${6:-0}"
     
     IP_ADDR=$(curl -sS ipv4.icanhazip.com)
-    PUB_KEY=$(cat /opt/imagitech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
+    PUB_KEY=$(cat /opt/virtarixtech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
     
-    source /opt/imagitech/core/server_geo.env 2>/dev/null
+    source /opt/virtarixtech/core/server_geo.env 2>/dev/null
     local COUNTRY="${SERVER_COUNTRY:-Unknown}"
     local ISP="${SERVER_ISP:-Unknown}"
     
@@ -583,8 +583,8 @@ menu_domain_ssl() {
     while true; do
         clear
         # Re-source config inside the loop so the UI updates dynamically if a domain changes
-        source /opt/imagitech/core/imagitech.conf
-        local PUB_KEY=$(cat /opt/imagitech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
+        source /opt/virtarixtech/core/virtarixtech.conf
+        local PUB_KEY=$(cat /opt/virtarixtech/core/keys/dnstt.pub 2>/dev/null || echo "Missing Key")
         
         draw_line
         echo -e "                   ${BOLD}DOMAIN & SSL${NC}                     "
@@ -608,12 +608,12 @@ menu_domain_ssl() {
                 echo -e "\n${CYAN}Current Domain: ${PRIMARY_DOMAIN}${NC}"
                 read -p "Enter New Host Domain: " new_host
                 if [[ -n "$new_host" ]]; then
-                    /opt/imagitech/bin/imagitech config host "$new_host"
+                    /opt/virtarixtech/bin/virtarixtech config host "$new_host"
                     echo ""
                     read -p "Renew Let's Encrypt SSL for $new_host now? (y/n): " do_ssl
                     if [[ "$do_ssl" =~ ^[Yy] ]]; then
                         echo -e "\n${ORANGE}[*] Requesting Certificate... this takes 30-60 seconds...${NC}"
-                        /opt/imagitech/bin/imagitech cert renew "$new_host"
+                        /opt/virtarixtech/bin/virtarixtech cert renew "$new_host"
                     fi
                 fi
                 pause ;;
@@ -621,12 +621,12 @@ menu_domain_ssl() {
                 echo -e "\n${CYAN}Current NS Domain: ${NS_DOMAIN}${NC}"
                 read -p "Enter New NS Domain: " new_ns
                 if [[ -n "$new_ns" ]]; then
-                    /opt/imagitech/bin/imagitech config ns "$new_ns"
+                    /opt/virtarixtech/bin/virtarixtech config ns "$new_ns"
                 fi
                 pause ;;
             3) 
                 echo -e "\n${ORANGE}[*] Requesting Let's Encrypt Certificate. Services will temporarily pause...${NC}"
-                /opt/imagitech/bin/imagitech cert renew "$PRIMARY_DOMAIN"
+                /opt/virtarixtech/bin/virtarixtech cert renew "$PRIMARY_DOMAIN"
                 pause ;;
             4) 
                 clear
@@ -637,7 +637,7 @@ menu_domain_ssl() {
                 echo -e "\n${ORANGE}[*] Warning: Generating a new key will break existing SlowDNS clients.${NC}"
                 read -p "Are you sure? (y/n): " confirm_dnstt
                 if [[ "$confirm_dnstt" =~ ^[Yy] ]]; then
-                    /opt/imagitech/bin/imagitech dnstt renew
+                    /opt/virtarixtech/bin/virtarixtech dnstt renew
                 fi
                 pause ;;
             0) return ;;
@@ -676,11 +676,11 @@ menu_services() {
         read -p " Select Option : " opt
 
         case $opt in
-            1) /opt/imagitech/bin/imagitech service restart all; pause ;;
-            2) /opt/imagitech/bin/imagitech service restart dropbear; pause ;;
-            3) /opt/imagitech/bin/imagitech service restart imagitech-ws; pause ;;
-            4) /opt/imagitech/bin/imagitech service restart stunnel4; pause ;;
-            5) /opt/imagitech/bin/imagitech service restart imagitech-dnstt; pause ;;
+            1) /opt/virtarixtech/bin/virtarixtech service restart all; pause ;;
+            2) /opt/virtarixtech/bin/virtarixtech service restart dropbear; pause ;;
+            3) /opt/virtarixtech/bin/virtarixtech service restart virtarixtech-ws; pause ;;
+            4) /opt/virtarixtech/bin/virtarixtech service restart stunnel4; pause ;;
+            5) /opt/virtarixtech/bin/virtarixtech service restart virtarixtech-dnstt; pause ;;
             0) return ;;
             *) echo -e "${RED}Invalid option${NC}"; sleep 1 ;;
         esac
@@ -762,11 +762,11 @@ menu_monitoring() {
                 fi
                 draw_line
                 pause ;;
-            3) tail -n 50 /opt/imagitech/logs/imagitech.log; pause ;;
+            3) tail -n 50 /opt/virtarixtech/logs/virtarixtech.log; pause ;;
             4) grep "Failed password" /var/log/auth.log | tail -n 20; pause ;;
             5) 
-               if [ -x "/opt/imagitech/bin/btop" ]; then
-                   /opt/imagitech/bin/btop
+               if [ -x "/opt/virtarixtech/bin/btop" ]; then
+                   /opt/virtarixtech/bin/btop
                else
                    htop || top
                fi
@@ -806,10 +806,10 @@ menu_settings() {
                 echo "0. Turn Off Auto Reboot"
                 read -p "Select Option: " rb_opt
                 case $rb_opt in
-                    1) /opt/imagitech/bin/imagitech sys autoreboot 6 ;;
-                    2) /opt/imagitech/bin/imagitech sys autoreboot 12 ;;
-                    3) /opt/imagitech/bin/imagitech sys autoreboot 24 ;;
-                    0) /opt/imagitech/bin/imagitech sys autoreboot 0 ;;
+                    1) /opt/virtarixtech/bin/virtarixtech sys autoreboot 6 ;;
+                    2) /opt/virtarixtech/bin/virtarixtech sys autoreboot 12 ;;
+                    3) /opt/virtarixtech/bin/virtarixtech sys autoreboot 24 ;;
+                    0) /opt/virtarixtech/bin/virtarixtech sys autoreboot 0 ;;
                     *) echo -e "${RED}Invalid selection.${NC}" ;;
                 esac
                 pause ;;
@@ -825,14 +825,14 @@ menu_settings() {
                 read -n 1 -s -r -p "Press any key to open the editor..."
                 
                 # Call the API which now handles launching nano natively
-                /opt/imagitech/bin/imagitech sys banner
+                /opt/virtarixtech/bin/virtarixtech sys banner
                 
                 pause ;;
             3) 
                clear
                echo -e "${CYAN}Initializing Server Speedtest...${NC}\n"
-               if [ -x "/opt/imagitech/bin/speedtest" ]; then
-                   /opt/imagitech/bin/speedtest --accept-license --accept-gdpr
+               if [ -x "/opt/virtarixtech/bin/speedtest" ]; then
+                   /opt/virtarixtech/bin/speedtest --accept-license --accept-gdpr
                else
                    echo -e "${RED}[!] Ookla Speedtest binary not found. Please re-run the installer.${NC}"
                fi
@@ -840,17 +840,17 @@ menu_settings() {
             4) 
                 clear
                 echo -e "${RED}${BOLD}======================================================${NC}"
-                echo -e "${RED}${BOLD}  DANGER: COMPLETELY UNINSTALL IMAGITECH PLATFORM     ${NC}"
+                echo -e "${RED}${BOLD}  DANGER: COMPLETELY UNINSTALL VIRTARIX PLATFORM     ${NC}"
                 echo -e "${RED}${BOLD}======================================================${NC}"
                 echo -e "This action will:"
                 echo -e "  - Delete all VPN accounts & databases"
                 echo -e "  - Remove all Sidecars, Ports, and Routing rules"
-                echo -e "  - Wipe the /opt/imagitech directory entirely\n"
+                echo -e "  - Wipe the /opt/virtarixtech directory entirely\n"
                 
                 read -p "Are you absolutely sure? (Type 'YES' to confirm): " confirm_wipe
                 if [ "$confirm_wipe" == "YES" ]; then
                     echo -e "\n${ORANGE}[*] Wiping infrastructure...${NC}"
-                    /opt/imagitech/bin/imagitech sys uninstall
+                    /opt/virtarixtech/bin/virtarixtech sys uninstall
                     echo -e "${GREEN}System is clean. Exiting...${NC}"
                     sleep 2
                     exit 0
@@ -861,7 +861,7 @@ menu_settings() {
                 ;;
             5)
                 echo -e "\n${CYAN}[*] Flushing Server Geo-Data cache...${NC}"
-                rm -f /opt/imagitech/core/server_geo.env
+                rm -f /opt/virtarixtech/core/server_geo.env
                 fetch_server_geo
                 echo -e "${GREEN}[+] Geographic data successfully refreshed!${NC}"
                 pause ;;
@@ -873,7 +873,7 @@ menu_settings() {
                 read -p "Proceed with deployment? (y/n): " confirm_f2b
                 if [[ "$confirm_f2b" =~ ^[Yy] ]]; then
                     echo ""
-                    /opt/imagitech/bin/imagitech sys fail2ban
+                    /opt/virtarixtech/bin/virtarixtech sys fail2ban
                 fi
                 pause ;;
             0) return ;;
@@ -898,13 +898,13 @@ menu_backup_restore() {
         case $opt in
             1)
                 echo -e "\n${CYAN}Creating backup archive...${NC}"
-                /opt/imagitech/bin/imagitech sys backup
+                /opt/virtarixtech/bin/virtarixtech sys backup
                 pause
                 ;;
             2)
                 clear
                 echo -e "${CYAN}=== RESTORE SYSTEM BACKUP ===${NC}"
-                local backup_dir="/opt/imagitech/backups"
+                local backup_dir="/opt/virtarixtech/backups"
                 
                 # Ensure directory exists and is writable for SFTP uploads
                 if [ ! -d "$backup_dir" ]; then
@@ -947,7 +947,7 @@ menu_backup_restore() {
                     
                     if [ "$confirm_res" == "YES" ]; then
                         echo -e "\n${ORANGE}[*] Restoring system state and rebooting daemons...${NC}"
-                        /opt/imagitech/bin/imagitech sys restore "$target_file"
+                        /opt/virtarixtech/bin/virtarixtech sys restore "$target_file"
                         echo -e "${GREEN}[+] Restore complete! System state reverted successfully.${NC}"
                     else
                         echo -e "\n${GREEN}Restore aborted.${NC}"
@@ -973,7 +973,7 @@ show_dashboard() {
         get_db_stats
 
         draw_top
-        echo -e "${CYAN}│${NC} ${BOLD}${GREEN}             IMAGITECH DASHBOARD             ${NC} ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC} ${BOLD}${GREEN}             VIRTARIX DASHBOARD             ${NC} ${CYAN}│${NC}"
         draw_mid
         echo -e "  ${ORANGE}✦ Server IP${NC}       : ${GREEN}${SERVER_IP}${NC} ${CYAN}(${SERVER_COUNTRY})${NC}"
         echo -e "  ${ORANGE}✦ ISP${NC}             : ${CYAN}${SERVER_ISP}${NC}"
@@ -983,9 +983,9 @@ show_dashboard() {
         echo -e "  ${ORANGE}✦ Primary Domain${NC}  : ${GREEN}${PRIMARY_DOMAIN}${NC}"
         draw_mid
         
-        printf "  ${CYAN}WS-Proxy: %b   Stunnel : %b   Dropbear: %b${NC}\n" "$(check_service imagitech-ws)" "$(check_service stunnel4)" "$(check_service dropbear)"
-        printf "  ${CYAN}Dante   : %b   UDP Cust: %b   DNSTT   : %b${NC}\n" "$(check_service danted)" "$(check_service imagitech-udp-custom)" "$(check_service imagitech-dnstt)"
-        printf "  ${CYAN}Monitor : %b${NC}\n" "$(check_service imagitech-monitor)"
+        printf "  ${CYAN}WS-Proxy: %b   Stunnel : %b   Dropbear: %b${NC}\n" "$(check_service virtarixtech-ws)" "$(check_service stunnel4)" "$(check_service dropbear)"
+        printf "  ${CYAN}Dante   : %b   UDP Cust: %b   DNSTT   : %b${NC}\n" "$(check_service danted)" "$(check_service virtarixtech-udp-custom)" "$(check_service virtarixtech-dnstt)"
+        printf "  ${CYAN}Monitor : %b${NC}\n" "$(check_service virtarixtech-monitor)"
         echo -e ""
         echo -e "  ${ORANGE}Data Used Today${NC}   : ${GREEN}${BW_TODAY}${NC}"
         echo -e "  ${ORANGE}Data Used Month${NC}   : ${CYAN}${BW_MONTH}${NC}"
@@ -1012,14 +1012,14 @@ show_dashboard() {
             6) menu_backup_restore ;;
             7) 
                clear
-               echo -e "${CYAN}=== UPDATE IMAGITECH PLATFORM ===${NC}"
+               echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
                echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
                echo -e "Your users, database, domains, and configurations will ${GREEN}NOT${NC} be affected.\n"
                
                read -p "Proceed with update? (y/n): " confirm_update
                if [[ "$confirm_update" =~ ^[Yy] ]]; then
                    echo ""
-                   /opt/imagitech/bin/imagitech sys update
+                   /opt/virtarixtech/bin/virtarixtech sys update
                    pause
                fi
                ;;
