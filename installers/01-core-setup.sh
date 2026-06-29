@@ -1,17 +1,17 @@
-# File: /root/imagitech-install/01-core-setup.sh
+# File: /root/virtarixtech-install/01-core-setup.sh
 # Purpose: Bootstraps the environment idempotently.
 
 #!/bin/bash
-source /opt/imagitech/lib/installer_utils.sh
+source /opt/virtarixtech/lib/installer_utils.sh
 
 log_event "INFO" "Starting Phase 1: Core Infrastructure Setup"
 
 # 1. Scaffolding Directories safely
-safe_create_dir "/opt/imagitech/bin"
-safe_create_dir "/opt/imagitech/core/keys"
-safe_create_dir "/opt/imagitech/lib"
-safe_create_dir "/opt/imagitech/logs"
-safe_create_dir "/opt/imagitech/services/monitor"
+safe_create_dir "/opt/virtarixtech/bin"
+safe_create_dir "/opt/virtarixtech/core/keys"
+safe_create_dir "/opt/virtarixtech/lib"
+safe_create_dir "/opt/virtarixtech/logs"
+safe_create_dir "/opt/virtarixtech/services/monitor"
 
 # 2. Idempotent Dependency Installation
 PACKAGES=(
@@ -23,7 +23,7 @@ PACKAGES=(
 log_event "INFO" "Verifying core dependencies..."
 DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null 2>&1
 # Network Optimizations (TCP BBR)
-cat <<EOF > /etc/sysctl.d/99-imagitech-bbr.conf
+cat <<EOF > /etc/sysctl.d/99-virtarixtech-bbr.conf
 net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
 net.ipv4.ip_forward=1
@@ -39,12 +39,12 @@ if ! grep -qxF '/bin/false' /etc/shells; then
 fi
 
 # 3. Safe Configuration Generation
-CONF_FILE="/opt/imagitech/core/imagitech.conf"
+CONF_FILE="/opt/virtarixtech/core/virtarixtech.conf"
 if [ ! -f "$CONF_FILE" ]; then
     log_event "INFO" "Configuration file missing. Initiating interactive setup."
     
-    read -p "Primary VPN Domain (e.g., vpn.imagitech.online): " DOMAIN
-    read -p "Nameserver Domain (e.g., ns-vpn.imagitech.online): " NS_DOMAIN
+    read -p "Primary VPN Domain (e.g., vpn.savag.online): " DOMAIN
+    read -p "Nameserver Domain (e.g., ns-vpn.savag.online): " NS_DOMAIN
     
     cat <<EOF > "$CONF_FILE"
 # IMAGITECH GLOBAL CONFIGURATION
@@ -68,18 +68,18 @@ fi
 
 # 4. Safe Database Initialization
 # (Calls the function we wrote in Phase 2)
-source /opt/imagitech/lib/db.sh
+source /opt/virtarixtech/lib/db.sh
 init_database
 
 log_event "INFO" "Configuring automatic UI dashboard on root login..."
 if ! grep -qx "menu" /root/.bashrc; then
-    echo -e "\n# Auto-start Imagitech Dashboard" >> /root/.bashrc
+    echo -e "\n# Auto-start Virtarixtech Dashboard" >> /root/.bashrc
     echo '[[ $- == *i* ]] && menu' >> /root/.bashrc
 fi
 
 # Setup Log Rotation
-cat <<EOF > /etc/logrotate.d/imagitech
-/opt/imagitech/logs/imagitech.log {
+cat <<EOF > /etc/logrotate.d/virtarixtech
+/opt/virtarixtech/logs/virtarixtech.log {
     daily
     rotate 7
     compress
