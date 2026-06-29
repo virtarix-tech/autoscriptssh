@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# File: /opt/imagitech/services/monitor/daemon.py
+# File: /opt/virtarixtech/services/monitor/daemon.py
 # Purpose: Real-time Multi-Login, Bandwidth Accounting, and OS Reaper
 
 import os
@@ -11,8 +11,8 @@ import pwd
 from collections import defaultdict
 
 # --- CONFIGURATION ---
-DB_PATH = "/opt/imagitech/core/database.db"
-ONLINE_FILE = "/opt/imagitech/core/online_users.txt"
+DB_PATH = "/opt/virtarixtech/core/database.db"
+ONLINE_FILE = "/opt/virtarixtech/core/online_users.txt"
 CHECK_INTERVAL = 30  
 
 class ImagitechMonitor:
@@ -223,5 +223,5 @@ class ImagitechMonitor:
             time.sleep(CHECK_INTERVAL)
 
 if __name__ == "__main__":
-    monitor = ImagitechMonitor()
+    monitor = VirtarixtechMonitor()
     monitor.run()
