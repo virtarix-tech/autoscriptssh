@@ -1,9 +1,9 @@
-# File: /opt/imagitech/lib/users.sh
+# File: /opt/virtarixtech/lib/users.sh
 # Purpose: Business logic for user lifecycle.
 
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/system.sh
-source /opt/imagitech/lib/db.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/system.sh
+source /opt/virtarixtech/lib/db.sh
 
 validate_username() {
     local username="$1"
