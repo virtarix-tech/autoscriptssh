@@ -1,8 +1,8 @@
-# File: /opt/imagitech/lib/installer_utils.sh
+# File: /opt/virtarixtech/lib/installer_utils.sh
 # Purpose: Idempotent helper functions for safe deployment.
 
 # Ensure we have our logging function
-source /opt/imagitech/lib/system.sh 2>/dev/null || echo "Warning: system.sh not found."
+source /opt/virtarixtech/lib/system.sh 2>/dev/null || echo "Warning: system.sh not found."
 
 run_with_spinner() {
     local message="$1"
@@ -83,7 +83,7 @@ safe_deploy_systemd() {
 
 ensure_tls_cert() {
     local domain="$1"
-    local cert_path="/opt/imagitech/core/keys/stunnel.pem"
+    local cert_path="/opt/virtarixtech/core/keys/stunnel.pem"
     
     if [ -s "$cert_path" ]; then
         log_event "INFO" "TLS Certificate already exists. Skipping generation."
@@ -94,11 +94,11 @@ ensure_tls_cert() {
     
     # Generate an emergency self-signed cert immediately so Stunnel can boot
     run_with_spinner "Generating TLS Certificate ($domain)..." openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
-        -keyout /opt/imagitech/core/keys/private.key \
-        -out /opt/imagitech/core/keys/fullchain.cer \
-        -subj "/C=US/ST=NY/L=NY/O=Imagitech/CN=$domain"
+        -keyout /opt/virtarixtech/core/keys/private.key \
+        -out /opt/virtarixtech/core/keys/fullchain.cer \
+        -subj "/C=US/ST=NY/L=NY/O=Virtarixtech/CN=$domain"
         
-    cat /opt/imagitech/core/keys/fullchain.cer /opt/imagitech/core/keys/private.key > "$cert_path"
+    cat /opt/virtarixtech/core/keys/fullchain.cer /opt/virtarixtech/core/keys/private.key > "$cert_path"
     chmod 600 "$cert_path"
     
     log_event "INFO" "Self-signed TLS fallback generated successfully."
