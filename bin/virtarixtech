@@ -1,11 +1,11 @@
 #!/bin/bash
-# File: /opt/imagitech/bin/imagitech
+# File: /opt/virtarixtech/bin/virtarixtech
 # Purpose: The internal CLI API router.
 
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/users.sh
-source /opt/imagitech/lib/system.sh
-source /opt/imagitech/lib/services.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/users.sh
+source /opt/virtarixtech/lib/system.sh
+source /opt/virtarixtech/lib/services.sh
 
 COMMAND="$1"
 SUBCOMMAND="$2"
@@ -16,8 +16,8 @@ ARG6="$6"
 ARG7="$7"
 
 show_help() {
-    echo -e "\033[0;36mIMAGITECH CLI API\033[0m"
-    echo "Usage: imagitech <resource> <action> [args]"
+    echo -e "\033[0;36mVIRTARIXTECH CLI API\033[0m"
+    echo "Usage: virtarixtech <resource> <action> [args]"
     echo ""
     echo "Commands:"
     echo "  user add <user> <pass> <days> <max_logins> <bw_limit>  - Create a new VPN account"
@@ -83,8 +83,8 @@ case "$COMMAND" in
             update)     update_script ;;
             uninstall)  uninstall_script ;;
             online)
-                if [ -f "/opt/imagitech/core/online_users.txt" ]; then
-                    cat "/opt/imagitech/core/online_users.txt"
+                if [ -f "/opt/virtarixtech/core/online_users.txt" ]; then
+                    cat "/opt/virtarixtech/core/online_users.txt"
                 else
                     echo "Daemon is starting up..."
                 fi
