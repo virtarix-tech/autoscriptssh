@@ -1,11 +1,11 @@
 <div align="center">
-  <h1>🚀 IMAGITECH AUTOSCRIPT - COMMUNITY EDITION</h1>
+  <h1>🚀 VERTARIXTECH AUTOSCRIPT - COMMUNITY EDITION</h1>
   <p><b>An automated, highly-resilient, and elite VPN & SSH orchestration engine built for modern VPS infrastructure.</b></p>
 </div>
 
 ---
 
-Imagitech Provisions a multi-protocol proxy environment complete with real-time tracking, aggressive bandwidth enforcement, multi-login prevention, anti-DDoS features, and a dynamic CLI dashboard. 
+Virtarixtech Provisions a multi-protocol proxy environment complete with real-time tracking, aggressive bandwidth enforcement, multi-login prevention, anti-DDoS features, and a dynamic CLI dashboard. 
 
 Built exclusively for **Ubuntu (20.04, 22.04, 24.04)** and **Debian (11, 12)** LTS to guarantee 100% stability.
 
@@ -35,7 +35,7 @@ apt update && apt upgrade -y
 ```
 
 ```bash
-bash <(curl -sS -L https://raw.githubusercontent.com/imagi-tech/autoscriptssh/main/install.sh)
+bash <(curl -sS -L https://raw.githubusercontent.com/virtarix-tech/autoscriptssh/main/install.sh)
 ```
 
 ## 🛠️ Operations & Usage
@@ -45,30 +45,23 @@ Once the installation completes, manage your server securely:
 1. **Interactive Dashboard:** Type `menu` to launch the beautiful and comprehensive TUI panel for managing users, monitoring connections, and modifying system settings.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/84a494f4-7f92-4c77-bd8d-31398cf2978d" alt="Dashboard & Menus" width="300">
+  <
 </p>
    
 2. **Headless Internal API:** Type `imagitech` followed by an API command to script automations natively.
-   - Example: `imagitech user add test 12345 30 2 10` (Create user 'test', pass '12345', 30 days, 2 devices, 10GB Limit)
-   - Example: `imagitech service restart all`
+   - Example: `virtarixtech user add test 12345 30 2 10` (Create user 'test', pass '12345', 30 days, 2 devices, 10GB Limit)
+   - Example: `virtarixtech service restart all`
 
 ## 📂 System Architecture
 
 The script strictly adheres to modern Linux engineering principles. It avoids polluting your global namespace; all configurations, python daemons, and databases are strictly sandboxed.
 
-- `/opt/imagitech/core/`: SQLite3 Databases, SSL certificates, DNSTT public/private keys.
-- `/opt/imagitech/services/`: Python engine (`daemon.py`) and Async Routing Proxy (`ws-proxy.py`).
-- `/opt/imagitech/lib/`: Core bash logic modules.
-- `/opt/imagitech/backups/`: Location for encrypted snapshots and disaster recovery via SFTP.
+- `/opt/virtarixtech/core/`: SQLite3 Databases, SSL certificates, DNSTT public/private keys.
+- `/opt/virtarixtech/services/`: Python engine (`daemon.py`) and Async Routing Proxy (`ws-proxy.py`).
+- `/opt/virtarixtech/lib/`: Core bash logic modules.
+- `/opt/virtarixtech/backups/`: Location for encrypted snapshots and disaster recovery via SFTP.
 
 ## ⚠️ Disclaimer
 This software is intended for educational purposes, privacy enhancement, and legal network administration. Abuse of this service for spam, DDoS, or illegal operations is strictly prohibited. The developer takes no responsibility for misuse.
 
 
-<div align="center">
-  <p>
-    <b>Subscribe</b> → <a href="https://t.me/imagivpnbot">@imagivpnbot</a><br>
-    <b>Channel</b> → <a href="https://t.me/imagitech001">@imagitech001</a><br>
-    <b>Developer</b> → <a href="https://t.me/DR34_M3R">†hε drεαmεr</a>
-  </p>
-</div>
