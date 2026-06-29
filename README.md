@@ -31,7 +31,7 @@ Built exclusively for **Ubuntu (20.04, 22.04, 24.04)** and **Debian (11, 12)** L
 To deploy the platform on a fresh Ubuntu or Debian server, run the following command as `root`:
 
 ```bash
-apt update && apt upgrade -y
+apt update && apt upgrade -y && 
 ```
 
 ```bash
