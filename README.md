@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🚀 VERTARIXTECH AUTOSCRIPT - COMMUNITY EDITION</h1>
+  <h1>🚀 VIRTARIXTECH AUTOSCRIPT - COMMUNITY EDITION</h1>
   <p><b>An automated, highly-resilient, and elite VPN & SSH orchestration engine built for modern VPS infrastructure.</b></p>
 </div>
 
@@ -48,7 +48,7 @@ Once the installation completes, manage your server securely:
   <
 </p>
    
-2. **Headless Internal API:** Type `imagitech` followed by an API command to script automations natively.
+2. **Headless Internal API:** Type `virtarixtech` followed by an API command to script automations natively.
    - Example: `virtarixtech user add test 12345 30 2 10` (Create user 'test', pass '12345', 30 days, 2 devices, 10GB Limit)
    - Example: `virtarixtech service restart all`
 
