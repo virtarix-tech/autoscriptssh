@@ -1,8 +1,8 @@
-# File: /opt/imagitech/lib/db.sh
+# File: /opt/virtarixtech/lib/db.sh
 # Purpose: Database interaction layer.
 
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/system.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/system.sh
 
 init_database() {
     log_event "INFO" "Initializing database schema at $DB_PATH"
