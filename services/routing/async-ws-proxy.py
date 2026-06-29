@@ -1,4 +1,4 @@
-# File: /opt/imagitech/services/routing/async-ws-proxy.py
+# File: /opt/virtarixtech/services/routing/async-ws-proxy.py
 # Purpose: High-performance Asynchronous WebSocket to SSH multiplexer.
 
 import asyncio
