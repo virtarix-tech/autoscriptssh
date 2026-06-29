@@ -1,15 +1,15 @@
-# File: /opt/imagitech/lib/services.sh
+# File: /opt/virtarixtech/lib/services.sh
 # Purpose: Safe service orchestration and restarts.
 
-source /opt/imagitech/core/imagitech.conf
-source /opt/imagitech/lib/system.sh
+source /opt/virtarixtech/core/virtarixtech.conf
+source /opt/virtarixtech/lib/system.sh
 
 restart_service() {
     local service_name="$1"
     
     if [ "$service_name" == "all" ]; then
-        log_event "INFO" "Restarting ALL Imagitech services..."
-        local services=(imagitech-ws imagitech-dnstt imagitech-monitor imagitech-udp-custom stunnel4 dropbear danted ssh sshd)
+        log_event "INFO" "Restarting ALL Virtarixtech services..."
+        local services=(virtarixtech-ws virtarixtech-dnstt virtarixtech-monitor virtarixtech-udp-custom stunnel4 dropbear danted ssh sshd)
         for svc in "${services[@]}"; do
             systemctl restart "$svc" >/dev/null 2>&1
             log_event "INFO" "Restarted $svc"
@@ -19,7 +19,7 @@ restart_service() {
 
     # Strict whitelist to prevent arbitrary systemctl execution
     case "$service_name" in
-        dropbear|stunnel4|imagitech-ws|imagitech-dnstt|imagitech-monitor|danted|imagitech-udp-custom|ssh|sshd)
+        dropbear|stunnel4|virtarixtech-ws|virtarixtech-dnstt|virtarixtech-monitor|danted|virtarixtech-udp-custom|ssh|sshd)
             log_event "INFO" "Restarting service: $service_name"
             systemctl restart "$service_name"
             
