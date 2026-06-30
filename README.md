@@ -1,5 +1,5 @@
 <div align="center">
-  <h1><i>🚀 VirtarixTech AutoVPNScript 🚀
+  <h1><i>🚀VirtarixTech AutoVPNScript🚀<br>
   <p><b>An automated, highly-resilient, and elite VPN & SSH orchestration engine built for modern VPS infrastructure.</b></p>
 </div>
 
