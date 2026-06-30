@@ -254,7 +254,7 @@ update_script() {
 
     # 4. Database Migrations (Direct query to avoid infinite sourcing loop)
     echo -e "  \033[0;36m-> Running database migrations...\033[0m"
-    local DB_PATH="/opt/imagitech/core/database.db"
+    local DB_PATH="/opt/virtarixtech/core/database.db"
     local col_exists=$(sqlite3 "$DB_PATH" "PRAGMA table_info(users);" | grep "data_usage")
     if [[ -z "$col_exists" ]]; then
         sqlite3 "$DB_PATH" "ALTER TABLE users ADD COLUMN data_usage BIGINT DEFAULT 0;"
