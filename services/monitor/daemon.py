@@ -29,10 +29,10 @@ class ImagitechMonitor:
 
     def setup_iptables(self):
         try:
-            subprocess.run("iptables -N IMAGITECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
-            check_link = subprocess.run("iptables -C OUTPUT -j IMAGITECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
+            subprocess.run("iptables -N VIRTARIXTECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
+            check_link = subprocess.run("iptables -C OUTPUT -j VIRTARIXTECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
             if check_link.returncode != 0:
-                subprocess.run("iptables -I OUTPUT -j IMAGITECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
+                subprocess.run("iptables -I OUTPUT -j VIRTARIXTECH-ACCT", shell=True, stderr=subprocess.DEVNULL)
         except Exception as e:
             self.log_event("ERROR", f"IPTables setup failed: {e}")
 
