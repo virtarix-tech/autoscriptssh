@@ -15,7 +15,7 @@ DB_PATH = "/opt/virtarixtech/core/database.db"
 ONLINE_FILE = "/opt/virtarixtech/core/online_users.txt"
 CHECK_INTERVAL = 30  
 
-class ImagitechMonitor:
+class VirtarixtechMonitor:
     def __init__(self):
         self.db_path = DB_PATH
         self.user_policies = {} 
