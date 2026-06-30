@@ -45,7 +45,7 @@ Once the installation completes, manage your server securely:
 1. **Interactive Dashboard:** Type `menu` to launch the beautiful and comprehensive TUI panel for managing users, monitoring connections, and modifying system settings.
 
 <p align="center">
-  <
+  <img src="https://img.shields.io/badge/Release-v3.0-red.svg"></h2>
 </p>
    
 2. **Headless Internal API:** Type `virtarixtech` followed by an API command to script automations natively.
