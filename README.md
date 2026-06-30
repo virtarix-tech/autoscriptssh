@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🚀 VIRTARIXTECH AUTOSCRIPT - COMMUNITY EDITION</h1>
+  <h1>🚀 VIRTARIXTECH AUTOSCRIPT </h1>
   <p><b>An automated, highly-resilient, and elite VPN & SSH orchestration engine built for modern VPS infrastructure.</b></p>
 </div>
 
