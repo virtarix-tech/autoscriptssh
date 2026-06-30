@@ -13,7 +13,7 @@ NC='\033[0m'
 
 clear
 echo -e "${CYAN}======================================================${NC}"
-echo -e "${GREEN}      VIRTARIXTECH ENTERPRISE DEPLOYMENT PIPELINE        ${NC}"
+echo -e "${GREEN}      Virtarixtech AutoscriptVPN-AIO (V2.7.8)       ${NC}"
 echo -e "${CYAN}======================================================${NC}"
 
 if [ "${EUID}" -ne 0 ]; then
@@ -109,7 +109,7 @@ cd /root
 rm -rf /root/virtarixtech-tmp
 
 echo -e "\n${CYAN}======================================================${NC}"
-echo -e "${GREEN}      VIRTARIXTECH DEPLOYMENT COMPLETE                   ${NC}"
+echo -e "${GREEN}      Virtarixtech AutoscriptVPN-AIO COMPLETE                   ${NC}"
 echo -e "${CYAN}======================================================${NC}"
 echo -e "Your infrastructure is now running safely in ${ORANGE}/opt/virtarixtech${NC}"
 echo -e "Type ${GREEN}menu${NC} to access the UI dashboard."
