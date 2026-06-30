@@ -38,40 +38,12 @@ apt update && apt upgrade -y &&
 bash <(curl -sS -L https://raw.githubusercontent.com/virtarix-tech/autoscriptssh/main/install.sh)
 ```
 
-## 🛠️ Operations & Usage
-
-Once the installation completes, manage your server securely:
-
-1. **Interactive Dashboard:** Type `menu` to launch the beautiful and comprehensive TUI panel for managing users, monitoring connections, and modifying system settings.
-
 <p align="center">
-   
-</p>
-   
-2. **Headless Internal API:** Type `virtarixtech` followed by an API command to script automations natively.
-   - Example: `virtarixtech user add test 12345 30 2 10` (Create user 'test', pass '12345', 30 days, 2 devices, 10GB Limit)
-   - Example: `virtarixtech service restart all`
-
-## 📂 System Architecture
-
-The script strictly adheres to modern Linux engineering principles. It avoids polluting your global namespace; all configurations, python daemons, and databases are strictly sandboxed.
-
-- `/opt/virtarixtech/core/`: SQLite3 Databases, SSL certificates, DNSTT public/private keys.
-- `/opt/virtarixtech/services/`: Python engine (`daemon.py`) and Async Routing Proxy (`ws-proxy.py`).
-- `/opt/virtarixtech/lib/`: Core bash logic modules.
-- `/opt/virtarixtech/backups/`: Location for encrypted snapshots and disaster recovery via SFTP.
-
-## ⚠️ Disclaimer
-This software is intended for educational purposes, privacy enhancement, and legal network administration. Abuse of this service for spam, DDoS, or illegal operations is strictly prohibited. The developer takes no responsibility for misuse.
-
-
-<p align="center">
-
 
 <h2 align="center">
 Auto Script Install XRAY/SSH Websocket Service
-Mod By d0x-dev
-<img src="https://img.shields.io/badge/Release-v2.7.8-green.svg"></h2>
+Mod By Virtarix-Tech Dev
+<img src="https://img.shields.io/badge/Release-v2.7.8-lime.svg"></h2>
 
 </p> 
 <h2 align="center"> Supported Linux Distribution</h2>
@@ -99,12 +71,42 @@ Mod By d0x-dev
 
 PLEASE MAKE SURE YOUR DOMAIN SETTINGS IN YOUR CLOUDFLARE AS BELOW (SSL/TLS SETTINGS)<br>
 <br>
+1. Your SSL/TLS encryption mode is Full
+2. Enable SSL/TLS Recommender ✅
+3. Edge Certificates > Disable Always Use HTTPS (off)
+
+
+## 🛠️ Operations & Usage
+
+Once the installation completes, manage your server securely:
+
+1. **Interactive Dashboard:** Type `menu` to launch the beautiful and comprehensive TUI panel for managing users, monitoring connections, and modifying system settings.
+
+<p align="center">
+   
+</p>
+   
+2. **Headless Internal API:** Type `virtarixtech` followed by an API command to script automations natively.
+   - Example: `virtarixtech user add test 12345 30 2 10` (Create user 'test', pass '12345', 30 days, 2 devices, 10GB Limit)
+   - Example: `virtarixtech service restart all`
+
+## 📂 System Architecture
+
+The script strictly adheres to modern Linux engineering principles. It avoids polluting your global namespace; all configurations, python daemons, and databases are strictly sandboxed.
+
+- `/opt/virtarixtech/core/`: SQLite3 Databases, SSL certificates, DNSTT public/private keys.
+- `/opt/virtarixtech/services/`: Python engine (`daemon.py`) and Async Routing Proxy (`ws-proxy.py`).
+- `/opt/virtarixtech/lib/`: Core bash logic modules.
+- `/opt/virtarixtech/backups/`: Location for encrypted snapshots and disaster recovery via SFTP.
+
+## ⚠️ Disclaimer
+This software is intended for educational purposes, privacy enhancement, and legal network administration. Abuse of this service for spam, DDoS, or illegal operations is strictly prohibited. The developer takes no responsibility for misuse.
 
 
 <div align="center">
   <p>
     <b>𝗦𝘂𝗯𝘀𝗰𝗿𝗶𝗯𝗲</b> → <a href="https://t.me/inet_adminbot">@inet_adminbot</a><br>
     <b>𝗖𝗵𝗮𝗻𝗻𝗲𝗹</b> → <a href="https://t.me/wifi_BypassTechy">@wifi_BypassTechy</a><br>
-    <b>𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿</b> → <a href="t.me/nkihoy">VirtarixKe</a>
+    <b>𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿</b> → <a href="t.me/nkihoy">Virtarix Dev</a>
   </p>
 </div>
