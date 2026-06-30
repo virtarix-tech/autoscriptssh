@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🚀 VIRTARIXTECH AUTOSCRIPT </h1>
+  <h1>🚀 VirtarixTech AutoVPNScript </h1>
   <p><b>An automated, highly-resilient, and elite VPN & SSH orchestration engine built for modern VPS infrastructure.</b></p>
 </div>
 
@@ -65,3 +65,10 @@ The script strictly adheres to modern Linux engineering principles. It avoids po
 This software is intended for educational purposes, privacy enhancement, and legal network administration. Abuse of this service for spam, DDoS, or illegal operations is strictly prohibited. The developer takes no responsibility for misuse.
 
 
+<div align="center">
+  <p>
+    <b>𝗦𝘂𝗯𝘀𝗰𝗿𝗶𝗯𝗲</b> → <a href="https://t.me/inet_adminbot">@inet_adminbot</a><br>
+    <b>𝗖𝗵𝗮𝗻𝗻𝗲𝗹</b> → <a href="https://t.me/wifi_BypassTechy">@wifi_BypassTechy</a><br>
+    <b>𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿</b> → <a href="t.me/nkihoy">VirtarixKe</a>
+  </p>
+</div>
