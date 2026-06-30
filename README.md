@@ -28,16 +28,6 @@ Built exclusively for **Ubuntu (20.04, 22.04, 24.04)** and **Debian (11, 12)** L
 
 ## 📦 Zero-Touch Installation
 
-To deploy the platform on a fresh Ubuntu or Debian server, run the following command as `root`:
-
-```bash
-apt update && apt upgrade -y && 
-```
-
-```bash
-bash <(curl -sS -L https://raw.githubusercontent.com/virtarix-tech/autoscriptssh/main/install.sh)
-```
-
 <p align="center">
 
 <h2 align="center">
@@ -74,6 +64,18 @@ PLEASE MAKE SURE YOUR DOMAIN SETTINGS IN YOUR CLOUDFLARE AS BELOW (SSL/TLS SETTI
 1. Your SSL/TLS encryption mode is Full
 2. Enable SSL/TLS Recommender ✅
 3. Edge Certificates > Disable Always Use HTTPS (off)
+
+
+To deploy the platform on a fresh Ubuntu or Debian server, run the following command as `root`:
+
+```bash
+apt update && apt upgrade -y && 
+```
+
+```bash
+bash <(curl -sS -L https://raw.githubusercontent.com/virtarix-tech/autoscriptssh/main/install.sh)
+```
+
 
 
 ## 🛠️ Operations & Usage
