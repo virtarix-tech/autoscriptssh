@@ -59,7 +59,7 @@ async def handle_client(reader, writer):
         
         # HTTP Injector / ISP Bypass spoofing
         if "HTTP/" in req_str or "Upgrade:" in req_str or "upgrade:" in req_str:
-            response = b"HTTP/1.1 101 <b><i><font color="lime">Virtarix-Tech Premium AutoVPNScript</font></b>Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n"
+            response = b"HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n"
             writer.write(response)
             await writer.drain()
 
