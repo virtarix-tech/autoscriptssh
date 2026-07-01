@@ -62,7 +62,6 @@ async def handle_client(reader, writer):
             response = b"HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n"
             writer.write(response)
             await writer.drain()
-
         # Connect to the local Dropbear backend
         backend_reader, backend_writer = await asyncio.open_connection(BACKEND_HOST, BACKEND_PORT)
         
