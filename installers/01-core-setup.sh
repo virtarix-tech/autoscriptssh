@@ -17,9 +17,6 @@ safe_create_dir "/opt/virtarixtech/services/monitor"
 PACKAGES=("curl" "wget" "git" "cron" "iptables" "lsof" "tar" "unzip" "uuid-runtime" "ca-certificates" "openssl" "sqlite3" "bzip2" "dropbear" "stunnel4" "dante-server" "python3" "vnstat" "jq")
 log_event "INFO" "Verifying core dependencies..."
 DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null 2>&1
-)
-log_event "INFO" "Verifying core dependencies..."
-DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null 2>&1
 # Network Optimizations (TCP BBR)
 cat <<EOF > /etc/sysctl.d/99-virtarixtech-bbr.conf
 net.core.default_qdisc=fq
