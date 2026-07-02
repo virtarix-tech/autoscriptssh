@@ -1022,7 +1022,7 @@ show_dashboard() {
         
         echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN}[02]${NC} DOMAIN & SSL"
         echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN}[05]${NC} MONITORING"
-        echo -e "  ${CYAN}[04]${NC} XRAY Manager (VMess, VLESS, Trojan)"
+        echo -e "  ${CYAN}[04]${NC} XRAY Manager PANEL"
         echo -e "  ${CYAN}[06]${NC} SETTINGS             ${CYAN}[07]${NC} BACKUP & RESTORE"
         echo -e "  ${CYAN}[08]${NC} UPDATE SCRIPT        ${CYAN}[09]${NC} REBOOT"
         echo -e ""
