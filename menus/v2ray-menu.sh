@@ -6,7 +6,7 @@
 # ------------------------------------------
 # [ EDIT HERE ]: Define your core variables
 # ------------------------------------------
-DOMAIN=$(cat /etc/xray/domain 2>/dev/null || echo "erusmas.savag.online")
+DOMAIN=$(cat /etc/xray/domain)
 XRAY_CONFIG="/etc/xray/config.json"
 USER_DB="/etc/xray/users.db" # Simple flat file for tracking users/expirations
 
