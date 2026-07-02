@@ -18,7 +18,6 @@ PACKAGES=("curl" "wget" "git" "cron" "iptables" "lsof" "tar" "unzip" "uuid-runti
 log_event "INFO" "Verifying core dependencies..."
 DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null 2>&1
 )
-
 log_event "INFO" "Verifying core dependencies..."
 DEBIAN_FRONTEND=noninteractive apt-get update -y > /dev/null 2>&1
 # Network Optimizations (TCP BBR)
