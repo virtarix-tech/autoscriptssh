@@ -63,10 +63,10 @@ fetch_file "lib/services.sh" "/opt/virtarixtech/lib/services.sh"
 fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
     fetch_file "menus/main_menu.sh" "/opt/virtarixtech/menus/main_menu.sh"
     
-    # --- Copying Xray bin files ---
-    cp add-vmess /opt/virtarixtech/bin/
-    cp add-vless /opt/virtarixtech/bin/
-    cp add-trojan /opt/virtarixtech/bin/
+    # --- Fetching Xray bin files from repo ---
+fetch_file "bin/add-vmess" "/opt/virtarixtech/bin/add-vmess"
+fetch_file "bin/add-vless" "/opt/virtarixtech/bin/add-vless"
+fetch_file "bin/add-trojan" "/opt/virtarixtech/bin/add-trojan"
 
     # Apply execution permissions to bin/menus
     chmod +x /opt/virtarixtech/bin/virtarixtech
