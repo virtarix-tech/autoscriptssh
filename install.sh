@@ -72,7 +72,8 @@ fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
     chmod +x /opt/virtarixtech/bin/virtarixtech
     chmod +x /opt/virtarixtech/menus/main_menu.sh
     chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
-    chown -R xray:xray /etc/xray/
+    [ -d /etc/xray/ ] && chown -R xray:xray /etc/xray/
+    
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
 fetch_file "services/routing/async-ws-proxy.py" "/opt/virtarixtech/services/routing/ws-proxy.py"
