@@ -1,4 +1,4 @@
-#!/bash/bin
+#!/bin/bash
 # ==========================================
 # Advanced Multi-Transport Trojan Manager
 # ==========================================
