@@ -688,7 +688,7 @@ menu_services() {
 }
 
 # ==========================================================
-# [04] XRAY PROTOCOL PANEL (VMESS / VLESS / TROJAN)
+# [04] XRAY PROTOCOL PANEL
 # ==========================================================
 menu_xray_panel() {
     while true; do
