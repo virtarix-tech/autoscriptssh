@@ -139,6 +139,10 @@ class VirtarixtechMonitor:
                         subprocess.run(["userdel", "-f", user], check=False, stderr=subprocess.DEVNULL)
                         # SOCKS5 caches credentials, so we forcefully restart Dante to drop rogue connections
                         subprocess.run(["systemctl", "restart", "danted"], check=False, stderr=subprocess.DEVNULL)
+                        # --- ADD XRAY REAPING LOGIC HERE ---
+        os.system(f"jq 'del(.inbounds[0].settings.clients[] | select(.email==\"{user}\"))' /etc/xray/config.json > /etc/xray/config.json.tmp && mv /etc/xray/config.json.tmp /etc/xray/config.json")
+        subprocess.run(["systemctl", "restart", "xray"], check=False, stderr=subprocess.DEVNULL)
+        self.log_event("INFO", f"Deleted expired Xray user: {user}")
                         
                         if not conn: conn = sqlite3.connect(self.db_path)
                         conn.cursor().execute("UPDATE users SET status='EXPIRED' WHERE username=?", (user,))
