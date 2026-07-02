@@ -23,7 +23,7 @@ fi
 
 # Ensure basic fetch tools are present before we even start
 apt-get update -y >/dev/null 2>&1
-apt-get install -y curl wget >/dev/null 2>&1
+apt-get install -y curl wget jq >/dev/null 2>&1
 
 # --- 1. System Scaffolding ---
 echo -e "${CYAN}[*] Bootstrapping Base Architecture...${NC}"
@@ -72,7 +72,7 @@ fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
     chmod +x /opt/virtarixtech/bin/virtarixtech
     chmod +x /opt/virtarixtech/menus/main_menu.sh
     chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
-
+    chown -R xray:xray /etc/xray/
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
 fetch_file "services/routing/async-ws-proxy.py" "/opt/virtarixtech/services/routing/ws-proxy.py"
