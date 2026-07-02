@@ -688,7 +688,33 @@ menu_services() {
 }
 
 # ==========================================================
-# [04] MONITORING
+# [04] XRAY PROTOCOL PANEL (VMESS / VLESS / TROJAN)
+# ==========================================================
+menu_xray_panel() {
+    while true; do
+        clear
+        draw_line
+        echo -e "                 ${BOLD}XRAY PROTOCOL PANEL${NC}                 "
+        draw_line
+        echo -e "  ${CYAN}[01]${NC} VMess Management Menu"
+        echo -e "  ${CYAN}[02]${NC} VLESS Management Menu"
+        echo -e "  ${CYAN}[03]${NC} Trojan Management Menu"
+        echo -e ""
+        echo -e "  ${RED}[00]${NC} Return to Main Menu"
+        draw_line
+        read -p " Select Option : " opt
+        case $opt in
+            1) /opt/virtarixtech/menus/menu-vmess.sh ;;
+            2) /opt/virtarixtech/menus/menu-vless.sh ;;
+            3) /opt/virtarixtech/menus/menu-trojan.sh ;;
+            0) return ;;
+            *) echo -e "${RED}Invalid option${NC}"; sleep 1 ;;
+        esac
+    done
+}
+
+# ==========================================================
+# [05] MONITORING
 # ==========================================================
 format_bytes() {
     local bytes=$1
@@ -778,7 +804,7 @@ menu_monitoring() {
 }
 
 # ==========================================================
-# [05] SETTINGS
+# [06] SETTINGS
 # ==========================================================
 menu_settings() {
     while true; do
@@ -995,9 +1021,10 @@ show_dashboard() {
         draw_mid
         
         echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN}[02]${NC} DOMAIN & SSL"
-        echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN}[04]${NC} MONITORING"
-        echo -e "  ${CYAN}[05]${NC} SETTINGS             ${CYAN}[06]${NC} BACKUP & RESTORE"
-        echo -e "  ${CYAN}[07]${NC} UPDATE SCRIPT        ${CYAN}[08]${NC} REBOOT"
+        echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN}[05]${NC} MONITORING"
+        echo -e "  ${CYAN}[04]${NC} XRAY Manager (VMess, VLESS, Trojan)"
+        echo -e "  ${CYAN}[06]${NC} SETTINGS             ${CYAN}[07]${NC} BACKUP & RESTORE"
+        echo -e "  ${CYAN}[08]${NC} UPDATE SCRIPT        ${CYAN}[09]${NC} REBOOT"
         echo -e ""
         echo -e "  ${RED}[00]${NC} EXIT"
         draw_bot
@@ -1007,9 +1034,10 @@ show_dashboard() {
             1) menu_ssh_panel ;;
             2) menu_domain_ssl ;;
             3) menu_services ;;
-            4) menu_monitoring ;;
-            5) menu_settings ;;
-            6) menu_backup_restore ;;
+            4) menu_xray_panel ;;
+            5) menu_monitoring ;;
+            6) menu_settings ;;
+            7) menu_backup_restore ;;
             7) 
                clear
                echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
