@@ -14,7 +14,7 @@ safe_create_dir "/opt/virtarixtech/logs"
 safe_create_dir "/opt/virtarixtech/services/monitor"
 
 # 2. Idempotent Dependency Installation
-PACKAGES=(
+PACKAGES=("curl" "wget" "git" "cron" "iptables" "lsof" "tar" "unzip" "uuid-runtime" "ca-certificates" "openssl" "sqlite3" "bzip2" "dropbear" "stunnel4" "dante-server" "python3" "vnstat" "jq")
     "curl" "wget" "git" "cron" "iptables" "lsof" "tar" "unzip" 
     "uuid-runtime" "ca-certificates" "openssl" "sqlite3" "bzip2"
     "dropbear" "stunnel4" "dante-server" "python3" "vnstat"
