@@ -62,10 +62,14 @@ fetch_file "lib/services.sh" "/opt/virtarixtech/lib/services.sh"
 # Fetching the CLI router and Menu
 fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
 fetch_file "menus/main_menu.sh" "/opt/virtarixtech/menus/main_menu.sh"
+fetch_file "menus/menu-vmess.sh" "/opt/virtarixtech/menus/menu-vmess.sh"
+fetch_file "menus/menu-vless.sh" "/opt/virtarixtech/menus/menu-vless.sh"
+fetch_file "menus/menu-trojan.sh" "/opt/virtarixtech/menus/menu-trojan.sh"
 
 # Apply execution permissions to bin/menus
 chmod +x /opt/virtarixtech/bin/virtarixtech
 chmod +x /opt/virtarixtech/menus/main_menu.sh
+chmod +x /opt/virtarixtech/menus/menu-*.sh
 
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
