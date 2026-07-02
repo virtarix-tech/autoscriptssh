@@ -1032,13 +1032,13 @@ show_dashboard() {
 
         case $opt in
             1) menu_ssh_panel ;;
-            2) menu_domain_ssl ;;
-            3) menu_services ;;
             4) menu_xray_panel ;;
+            3) menu_services ;;
+            2) menu_domain_ssl ;;
             5) menu_monitoring ;;
             6) menu_settings ;;
             7) menu_backup_restore ;;
-            7) 
+            8) 
                clear
                echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
                echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
