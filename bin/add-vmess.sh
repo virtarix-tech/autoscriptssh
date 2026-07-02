@@ -17,3 +17,9 @@ echo -e "━━━━━━━━━━━━━━━━━━━━━━━�
 echo -e "uuid/key     : $uuid"
 echo -e "path ws      : /vmess"
 # ... add remaining logic to write to your JSON config ...
+# Add to /opt/virtarixtech/bin/add-vmess (and similarly for vless/trojan)
+# We use jq to safely insert the user into the JSON array
+jq --arg uuid "$uuid" --arg user "$user" '.inbounds[0].settings.clients += [{"id": $uuid, "alterId": 0, "email": $user}]' /etc/xray/config.json > /etc/xray/config.json.tmp && mv /etc/xray/config.json.tmp /etc/xray/config.json
+
+# Restart Xray to apply changes
+systemctl restart xray
