@@ -61,11 +61,17 @@ fetch_file "lib/services.sh" "/opt/virtarixtech/lib/services.sh"
 
 # Fetching the CLI router and Menu
 fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
-fetch_file "menus/main_menu.sh" "/opt/virtarixtech/menus/main_menu.sh"
+    fetch_file "menus/main_menu.sh" "/opt/virtarixtech/menus/main_menu.sh"
+    
+    # --- Copying Xray bin files ---
+    cp add-vmess /opt/virtarixtech/bin/
+    cp add-vless /opt/virtarixtech/bin/
+    cp add-trojan /opt/virtarixtech/bin/
 
-# Apply execution permissions to bin/menus
-chmod +x /opt/virtarixtech/bin/virtarixtech
-chmod +x /opt/virtarixtech/menus/main_menu.sh
+    # Apply execution permissions to bin/menus
+    chmod +x /opt/virtarixtech/bin/virtarixtech
+    chmod +x /opt/virtarixtech/menus/main_menu.sh
+    chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
 
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
