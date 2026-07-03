@@ -994,11 +994,12 @@ show_dashboard() {
         echo -e "  Active Users : ${GREEN}${ACTIVE_USERS}${NC} / ${TOTAL_USERS}    Expired : ${RED}${EXPIRED_USERS}${NC}"
         draw_mid
         
-        echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN} [02] ${NC} XRAY MANAGER"
-        echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN} [04] ${NC} RUNNING SERVICES"
-        echo -e " ${CYAN} [05] ${NC} MONITORING            ${CYAN} [06] ${NC} SETTINGS"
-        echo -e " ${CYAN} [07] ${NC} BACKUP & RESTORE        ${CYAN} [08] ${NC} UPDATE SCRIPT"
-        echo -e " ${CYAN} [09] ${NC} REBOOT"
+        echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN}[02]${NC} XRAY MANAGER"
+        echo -e "  ${CYAN}[03]${NC} DOMAIN & SSL         ${CYAN}[04]${NC} RUNNING SERVICES"
+        echo -e "  ${CYAN}[05]${NC} MONITORING           ${CYAN}[06]${NC} SETTINGS"
+        echo -e "  ${CYAN}[07]${NC} BACKUP & RESTORE     ${CYAN}[08]${NC} UPDATE SCRIPT"
+        echo -e "  ${CYAN}[09]${NC} REBOOT"
+        echo -e "  
         echo -e "  ${RED}[00]${NC} EXIT"
         draw_bot
         read -p " Select Option : " opt
