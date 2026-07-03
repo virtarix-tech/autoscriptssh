@@ -1028,10 +1028,9 @@ show_dashboard() {
                ;;
             8) 
                read -p "Are you sure you want to reboot the server? (y/n): " confirm
-               if [[ "$confirm" =~ ^[Yy] ]]; then reboot; fi
-               ;;
-            0) clear; exit 0 ;;
-            *) echo -e "${RED}Invalid option${NC}"; sleep 1 ;;
+        if [[ "$confirm" =~ ^[Yy] ]]; then reboot; fi ;;
+    0) clear; exit 0 ;;
+    *) echo -e " ${RED} Invalid option ${NC} " ; sleep 1 ;;
         esac
     done
 }
