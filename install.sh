@@ -90,6 +90,11 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
 if [ ! -f /etc/xray/domain ]; then
     echo "127.0.0.1" > /etc/xray/domain
 fi
+
+# Generate a blank JSON object template if config doesn't exist
+if [ ! -f /etc/xray/config.json ]; then
+    echo '{}' > /etc/xray/config.json
+fi
     
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
