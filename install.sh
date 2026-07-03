@@ -73,6 +73,7 @@ fetch_file "bin/renew-user.sh" "/opt/virtarixtech/bin/renew-user.sh"
     # Apply execution permissions to bin/menus
     chmod +x /opt/virtarixtech/bin/virtarixtech
     chmod +x /opt/virtarixtech/menus/main_menu.sh
+    chmod +x /opt/virtarixtech/bin/xray-menu.sh
     chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
     chmod +x /opt/virtarixtech/bin/*.sh
     [ -d /etc/xray/ ] && chown -R xray:xray /etc/xray/
