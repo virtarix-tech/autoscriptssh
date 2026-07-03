@@ -1018,7 +1018,7 @@ show_dashboard() {
                echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
                echo -e "Your users, database, domains, and configurations will ${GREEN}NOT${NC} be affected.\n"
                
-               read -p "Proceed with update? (y/n): " confirm_update
+               read -p "Proceed with update? (y/n): "confirm_update
                if [[ "$confirm_update" =~ ^[Yy] ]]; then
                    echo ""
                    /opt/virtarixtech/bin/virtarixtech sys update
