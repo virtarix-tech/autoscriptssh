@@ -1014,13 +1014,17 @@ show_dashboard() {
             7) menu_backup_restore ;;
             8)             
                clear
-        echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
-        echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
-        read -p "Proceed with update? (y/n): " confirm_update
-        if [[ "$confirm_update" =~ ^[Yy] ]]; then
-            /opt/virtarixtech/bin/virtarixtech sys update
-            pause
-        fi ;;
+               echo -e "${CYAN}=== UPDATE VIRTARIXTECH PLATFORM ===${NC}"
+               echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
+               echo -e "Your users, database, domains, and configurations will ${GREEN}NOT${NC} be affected.\n"
+               
+               read -p "Proceed with update? (y/n): " confirm_update
+               if [[ "$confirm_update" =~ ^[Yy] ]]; then
+                   echo ""
+                   /opt/virtarixtech/bin/virtarixtech sys update
+                   pause
+               fi
+               ;;
     9) 
         read -p "Are you sure you want to reboot the server? (y/n): " confirm
         if [[ "$confirm" =~ ^[Yy] ]]; then reboot; fi ;;
