@@ -999,7 +999,7 @@ show_dashboard() {
         echo -e "  ${CYAN}[05]${NC} MONITORING           ${CYAN}[06]${NC} SETTINGS"
         echo -e "  ${CYAN}[07]${NC} BACKUP & RESTORE     ${CYAN}[08]${NC} UPDATE SCRIPT"
         echo -e "  ${CYAN}[09]${NC} REBOOT"
-        echo -e "  
+        echo -e ""  
         echo -e "  ${RED}[00]${NC} EXIT"
         draw_bot
         read -p " Select Option : " opt
