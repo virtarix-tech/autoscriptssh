@@ -994,23 +994,24 @@ show_dashboard() {
         echo -e "  Active Users : ${GREEN}${ACTIVE_USERS}${NC} / ${TOTAL_USERS}    Expired : ${RED}${EXPIRED_USERS}${NC}"
         draw_mid
         
-        echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN}[02]${NC} DOMAIN & SSL"
-        echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN}[04]${NC} MONITORING"
-        echo -e "  ${CYAN}[05]${NC} SETTINGS             ${CYAN}[06]${NC} BACKUP & RESTORE"
-        echo -e "  ${CYAN}[07]${NC} UPDATE SCRIPT        ${CYAN}[08]${NC} REBOOT"
-        echo -e ""
+        echo -e "  ${CYAN}[01]${NC} SSH PANEL            ${CYAN} [02] ${NC} XRAY MANAGER"
+        echo -e "  ${CYAN}[03]${NC} RUNNING SERVICES     ${CYAN} [04] ${NC} RUNNING SERVICES"
+        echo -e " ${CYAN} [05] ${NC} MONITORING            ${CYAN} [06] ${NC} SETTINGS"
+        echo -e " ${CYAN} [07] ${NC} BACKUP & RESTORE        ${CYAN} [08] ${NC} UPDATE SCRIPT"
+        echo -e " ${CYAN} [09] ${NC} REBOOT"
         echo -e "  ${RED}[00]${NC} EXIT"
         draw_bot
         read -p " Select Option : " opt
 
         case $opt in
             1) menu_ssh_panel ;;
-            2) menu_domain_ssl ;;
-            3) menu_services ;;
-            4) menu_monitoring ;;
-            5) menu_settings ;;
-            6) menu_backup_restore ;;
-            7) 
+            2) /opt/virtarixtech/bin/xray-menu.sh ;;
+            3) menu_domain_ssl ;;
+            4) menu_services ;;
+            5) menu_monitoring ;;
+            6) menu_settings ;;
+            7) menu_backup_restore ;;
+            8) 
                clear
                echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
                echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
