@@ -1019,7 +1019,6 @@ show_dashboard() {
     echo -e " Your users, database, domains, and configurations will ${GREEN} NOT ${NC} be affected.\n"
     read -p "Proceed with update? (y/n): " confirm_update
     if [[ "$confirm_update" =~ ^[Yy] ]]; then
-        echo ""
         /opt/virtarixtech/bin/virtarixtech sys update
         read -p "Press enter to continue..."
     fi
