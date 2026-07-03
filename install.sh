@@ -91,6 +91,23 @@ if [ ! -f /etc/xray/domain ]; then
     echo "127.0.0.1" > /etc/xray/domain
 fi
 
+# Generate a baseline structured JSON template if config doesn't exist
+if [ ! -f /etc/xray/config.json ]; then
+    cat <<EOF > /etc/xray/config.json
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
+fi
 # Generate a blank JSON object template if config doesn't exist
 if [ ! -f /etc/xray/config.json ]; then
     echo '{}' > /etc/xray/config.json
