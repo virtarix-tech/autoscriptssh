@@ -1012,9 +1012,7 @@ show_dashboard() {
             6) menu_settings ;;
             7) menu_backup_restore ;;
             8) update_script ;;
-            9) reboot ;;
-            0) exit ;;
-            
+            9) 
                clear
                echo -e "${CYAN}=== UPDATE VIRTARIX PLATFORM ===${NC}"
                echo -e "${ORANGE}This will fetch the latest core files from GitHub.${NC}"
