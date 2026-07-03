@@ -63,15 +63,18 @@ fetch_file "lib/services.sh" "/opt/virtarixtech/lib/services.sh"
 fetch_file "bin/virtarixtech" "/opt/virtarixtech/bin/virtarixtech"
     fetch_file "menus/main_menu.sh" "/opt/virtarixtech/menus/main_menu.sh"
     
-    # --- Fetching Xray bin files from repo ---
+# --- Fetching Xray bin files from repo ---
 fetch_file "bin/add-vmess" "/opt/virtarixtech/bin/add-vmess"
 fetch_file "bin/add-vless" "/opt/virtarixtech/bin/add-vless"
 fetch_file "bin/add-trojan" "/opt/virtarixtech/bin/add-trojan"
+fetch_file "bin/delete-user.sh" "/opt/virtarixtech/bin/delete-user.sh"
+fetch_file "bin/renew-user.sh" "/opt/virtarixtech/bin/renew-user.sh"
 
     # Apply execution permissions to bin/menus
     chmod +x /opt/virtarixtech/bin/virtarixtech
     chmod +x /opt/virtarixtech/menus/main_menu.sh
     chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
+    chmod +x /opt/virtarixtech/bin/*.sh
     [ -d /etc/xray/ ] && chown -R xray:xray /etc/xray/
     
 # Fetching the Python services
