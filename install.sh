@@ -78,6 +78,18 @@ fetch_file "bin/renew-user.sh" "/opt/virtarixtech/bin/renew-user.sh"
     chmod +x /opt/virtarixtech/bin/add-vmess /opt/virtarixtech/bin/add-vless /opt/virtarixtech/bin/add-trojan
     chmod +x /opt/virtarixtech/bin/*.sh
     [ -d /etc/xray/ ] && chown -R xray:xray /etc/xray/
+
+        # --- Establish Core Xray Environment ---
+echo -e " Installing core Xray engine..."
+mkdir -p /etc/xray
+
+# Pull down the official Xray installation engine
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+
+# Generate a default dummy domain file so your scripts don't crash
+if [ ! -f /etc/xray/domain ]; then
+    echo "127.0.0.1" > /etc/xray/domain
+fi
     
 # Fetching the Python services
 fetch_file "services/monitor/daemon.py" "/opt/virtarixtech/services/monitor/daemon.py"
