@@ -743,8 +743,8 @@ menu_monitoring() {
                 draw_line
                 
                 local rank=1
-                # Sort by data_usage descending, limit to top 10
-                sqlite3 -separator '|' "$DB_PATH" "SELECT username, data_usage FROM users WHERE data_usage > 0 ORDER BY data_usage DESC LIMIT 10;" | while read -r line; do
+                # Sort by data_usage descending, limit to top 30
+                sqlite3 -separator '|' "$DB_PATH" "SELECT username, data_usage FROM users WHERE data_usage > 0 ORDER BY data_usage DESC LIMIT 30;" | while read -r line; do
                     local uname=$(echo "$line" | cut -d'|' -f1)
                     local bytes=$(echo "$line" | cut -d'|' -f2)
                     local formatted=$(format_bytes "$bytes")
