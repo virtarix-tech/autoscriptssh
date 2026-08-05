@@ -49,7 +49,7 @@ bash <(curl -sS -L https://raw.githubusercontent.com/virtarix-tech/autoscriptssh
 Auto Script Install XRAY/SSH Websocket Service
 Mod By Virtarix-Tech Dev
 <p align="center">
-<img src="https://img.shields.io/badge/Release-v2.7.8-lime.svg">
+<img src="https://img.shields.io/badge/Release-v1.9.8-lime.svg">
 <img src="https://img.shields.io/badge/Systemd-Required-cyan.svg">
 </p> 
 <h2 align="center"> Supported Linux Distribution</h2>
