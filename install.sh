@@ -13,7 +13,7 @@ NC='\033[0m'
 
 clear
 echo -e "${CYAN}======================================================${NC}"
-echo -e "${GREEN}      Virtarixtech AutoscriptVPN-AIO (V3.0)       ${NC}"
+echo -e "${GREEN}      Virtarixtech AutoscriptVPN-AIO (V1.9.2)       ${NC}"
 echo -e "${CYAN}======================================================${NC}"
 
 if [ "${EUID}" -ne 0 ]; then
