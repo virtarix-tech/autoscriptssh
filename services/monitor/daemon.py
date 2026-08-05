@@ -225,4 +225,3 @@ class VirtarixtechMonitor:
 if __name__ == "__main__":
     monitor = VirtarixtechMonitor()
     monitor.run()
-
